@@ -1,0 +1,6 @@
+framework module Pods_TabulaUITests {
+  umbrella header "Pods-TabulaUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

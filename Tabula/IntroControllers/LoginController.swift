@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import GoogleSignIn
+import FacebookCore
+import FacebookLogin
 
 class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
     
@@ -32,7 +34,7 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
         // Do any additional setup after loading the view.
     }
     
-    /////////////////////GOOGLE SIGN IN////////////////////
+    ///////////////////// GOOGLE LOGIN //////////////////////////////
     
     @objc func signInUsingGoogle(_ sender: UIButton){
         GIDSignIn.sharedInstance()?.delegate = self
@@ -50,7 +52,34 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
         }
     }
 
-    /////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    
+    
+    ///////////////////// Facebook LOGIN //////////////////////////////
+    
+    
+    @IBAction func loginWithFacebook(_ sender: Any){
+        let manager = LoginManager()
+        manager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { (result) in
+            switch result{
+            case .cancelled:
+                print("User cancelled login!")
+                break
+            case .failed(let error):
+                print("Login failed with error: \(error.localizedDescription)")
+                break
+            case .success(let grantedPermissions, let declinedPermisions, let accessToken):
+                print("Acces token: \(accessToken)")
+                
+            
+           }
+        }
+        
+        
+    }
+    
+    
+    ///////////////////////////////////////////////////////////////////
     
     @IBAction func signInPressed(_ sender: Any) {
         

@@ -9,6 +9,13 @@ target 'Tabula' do
 
  pod 'Alamofire', '~> 4.7'
  pod 'GoogleSignIn'
+ pod 'FacebookCore'
+ pod 'FacebookLogin'
+ pod 'FacebookShare'
+ pod 'FBSDKLoginKit'
+ pod 'moa', '~> 10.0'
+ pod 'Auk', '~> 9.0'
+
 
   target 'TabulaTests' do
     inherit! :search_paths

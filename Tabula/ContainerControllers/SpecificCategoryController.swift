@@ -22,6 +22,9 @@ class SpecificCategoryController: UIViewController, CategoriesControllerDelegate
  
     weak var containerDelegate : ContainerDelegate!
     
+    var netService = NetworkServices()
+    var items = ItemArray()
+    
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var specificLabel: UILabel!
@@ -35,6 +38,18 @@ class SpecificCategoryController: UIViewController, CategoriesControllerDelegate
         tableView.dataSource = self
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        netService.getItems(identifier: specificLabel.text!) { (items) in
+            self.items = items
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.items.items = []
+        tableView.reloadData()
     }
     
     func categoryTapped(_ sender: Int) {
@@ -55,9 +70,9 @@ extension SpecificCategoryController : UITableViewDataSource,UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "specificCell") as! SpecificCategoryCell
-        cell.nameLabel.text = "Dr. Lupu"
-        cell.addressLabel.text = "Strada penisului belit"
-        cell.descriptionLabel.text = "Cel mai fita cabinet oferim tot ce se poate de la muie pana la spalari pe dinti. Nu ratati ocazia unica"
+        cell.nameLabel.text = items.items[indexPath.row].Name
+        cell.addressLabel.text = items.items[indexPath.row].Address
+        cell.descriptionLabel.text = items.items[indexPath.row].Description
         cell.availabilityLabel.text = "Locuri libere"
         cell.delegate = self
         
@@ -65,7 +80,7 @@ extension SpecificCategoryController : UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return items.items.count
     }
     
     

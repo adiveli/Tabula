@@ -34,6 +34,13 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func registrationPressed(_ sender: Any) {
+        performSegue(withIdentifier: "toRegistration", sender: nil)
+    }
+    
+    
+    
+    
     ///////////////////// GOOGLE LOGIN //////////////////////////////
     
     @objc func signInUsingGoogle(_ sender: UIButton){
@@ -121,6 +128,8 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
                         //switching the screen
                         
                         print("It worked!")
+                        
+                        self.performSegue(withIdentifier: "loginSucceded", sender: nil)
                         
                     }else{
                         //error message in case of invalid credential

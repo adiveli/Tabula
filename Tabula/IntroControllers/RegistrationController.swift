@@ -52,7 +52,7 @@ class RegistrationController: UIViewController {
                 if let result = response.result.value {
                     
                     //converting it as NSDictionary
-                    let jsonData = result as! NSDictionary
+                    //let jsonData = result as! NSDictionary
                     
                 }
         }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 protocol CategoriesCellDelegate : class {
     func categoryTapped(_ sender: CategoriesCell, value : String)
 }
@@ -26,6 +27,9 @@ class CategoriesController: UIViewController, CategoriesCellDelegate {
     
     weak var containerDelegate: ContainerDelegate?
     
+    var categories = Categories()
+    var netService = NetworkServices()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,13 @@ class CategoriesController: UIViewController, CategoriesCellDelegate {
         tableView.dataSource = self
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        netService.getCategories { (categories) in
+            self.categories = categories
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -48,27 +59,31 @@ class CategoriesController: UIViewController, CategoriesCellDelegate {
     }
     
     
+    
+    
+    
 
 }
 
 extension CategoriesController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return categories.Categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoriesCell", for: indexPath) as! CategoriesCell
         cell.containerView.layer.cornerRadius = cell.containerView.frame.size.width / 6
+        cell.containerView.backgroundColor = UIColor.random()
         cell.containerView.clipsToBounds = true;
-        cell.categoryNameLabel.text = "Barbers"
+        cell.categoryNameLabel.text = categories.Categories[indexPath.row].Name
         cell.delegate = self
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 220
     }
     
     

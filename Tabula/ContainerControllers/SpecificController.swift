@@ -9,8 +9,19 @@
 import UIKit
 import Auk
 
-class SpecificController: UIViewController {
 
+protocol ServiceDelegate: class{
+    func prepareServices(sir: [String])
+}
+
+class SpecificController: UIViewController {
+    
+    
+    
+    
+    
+
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var servicesButton: UIButton!
@@ -28,11 +39,19 @@ class SpecificController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    
+    
     @IBAction func servicesPressed(_ sender: Any) {
         reviewButton.setImage(UIImage(named: "reviewsIcon"), for: UIControlState.normal)
         appointmentButton.setImage(UIImage(named: "AppointmentsIcon"), for: UIControlState.normal)
         servicesButton.setImage(UIImage(named: "ServiceIconColor"), for: UIControlState.normal)
         container.segueIdentifierReceivedFromParent("services")
+        if let specificController = self.container.currentViewController as? ServicesController{
+            print("Services")
+        }
+        
     }
     
     @IBAction func reviewPressed(_ sender: Any) {
@@ -40,6 +59,9 @@ class SpecificController: UIViewController {
         appointmentButton.setImage(UIImage(named: "AppointmentsIcon"), for: UIControlState.normal)
         servicesButton.setImage(UIImage(named: "ServiceIcon"), for: UIControlState.normal)
         container.segueIdentifierReceivedFromParent("reviews")
+        if let specificController = self.container.currentViewController as? ReviewsController{
+            print("Reviews")
+        }
     }
     @IBAction func appointmentPressed(_ sender: Any) {
         reviewButton.setImage(UIImage(named: "reviewsIcon"), for: UIControlState.normal)

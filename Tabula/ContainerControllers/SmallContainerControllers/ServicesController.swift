@@ -8,9 +8,16 @@
 
 import UIKit
 
+
 class ServicesController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    weak var delegate : ServiceDelegate!
+    
+    var servicesArray = ServiceArray()
+    
+    var netService = NetworkServices()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,17 +26,32 @@ class ServicesController: UIViewController {
         tableView.dataSource = self
     }
     
+    func fetchData(company: Int){
+        
+        netService.getServices(identifier: company) { (services) in
+            self.servicesArray = services
+            self.tableView.reloadData()
+        }
+        
+        
+    }
+    
+    
+    
+    
 }
 
 extension ServicesController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as! ServiceCell
+        cell.serviceLabel.text = servicesArray.Services[indexPath.row].Name
+        cell.priceLabel.text = "\(servicesArray.Services[indexPath.row].Price as! Int) RON"
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return servicesArray.Services.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

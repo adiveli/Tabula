@@ -63,6 +63,7 @@ class CategoriesTabController: UIViewController, ContainerDelegate {
             backButton.isHidden = false
             filterButton.isHidden = false
             container.segueIdentifierReceivedFromParent("specificCategory")
+            filterTableView.reloadData()
         } else{
             container.segueIdentifierReceivedFromParent("categories")
             backButton.isHidden = true
@@ -116,13 +117,18 @@ class CategoriesTabController: UIViewController, ContainerDelegate {
         
     }
     
-    func setSpecific(value: String){
+    func setSpecific(Name: String, ID: Int){
         container.segueIdentifierReceivedFromParent("toSpecific")
         backButton.isHidden = false
         filterButton.isHidden = true
-        if let specificController = self.container.currentViewController as? SpecificController{
-        }
         
+        if let specificController = self.container.currentViewController as? SpecificController{
+            specificController.nameLabel.text = Name
+            if let serviceController = specificController.container.currentViewController as? ServicesController{
+                serviceController.fetchData(company: ID)
+            }
+            
+        }
         
     }
     
@@ -211,9 +217,6 @@ extension CategoriesTabController: UITableViewDelegate,UITableViewDataSource{
            
         }
         }else{
-        
-        //if(filterArray.Specializations[indexPath.row].Specialization == "Remove Filters"){
-            print("sal")
             netService.getItems(identifier: pressedCategory) { (unfilteredItems) in
                 if let specificController = self.container.currentViewController as? SpecificCategoryController{
                     specificController.items = unfilteredItems

@@ -143,6 +143,41 @@ class NetworkServices{
         
     }
     
+    
+    func getServices(identifier: Int, completion: @escaping (ServiceArray) -> ()){
+        
+        let URL = "https://vaportofolio.ro/php/v1/getServicesByCompany.php"
+        //getting the username and password
+        let parameters: Parameters=[
+            "Company":identifier,
+            ]
+        
+        //making a post request
+        Alamofire.request(URL, method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                //printing response
+                print(response)
+                
+                let json = response.data
+                var items = ServiceArray()
+                
+                do{
+                    //created the json decoder
+                    let decoder = JSONDecoder()
+                    
+                    //using the array to put values
+                    items = try decoder.decode(ServiceArray.self, from: json!)
+                    
+                    //printing all the hero names
+                    completion(items)
+                }catch let err{
+                    print(err)
+                }
+        }
+        
+    }
+    
 
     
     

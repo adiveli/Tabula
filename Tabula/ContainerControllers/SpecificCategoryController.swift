@@ -14,10 +14,12 @@ protocol CategoriesControllerDelegate : class {
 }
 
 protocol SpecificCellDelegate : class {
-    func specificCategoryTapped(_ sender: SpecificCategoryCell, value : String)
+    func specificCategoryTapped(_ sender: SpecificCategoryCell, Name : String, ID: Int)
 }
 
 class SpecificCategoryController: UIViewController, CategoriesControllerDelegate, SpecificCellDelegate {
+    
+    
     
  
     weak var containerDelegate : ContainerDelegate!
@@ -56,11 +58,9 @@ class SpecificCategoryController: UIViewController, CategoriesControllerDelegate
         print("Index: \(sender)")
     }
     
-    func specificCategoryTapped(_ sender: SpecificCategoryCell, value: String) {
-        print("laba")
-        containerDelegate.setSpecific(value: value)
+    func specificCategoryTapped(_ sender: SpecificCategoryCell, Name: String, ID: Int) {
+        containerDelegate.setSpecific(Name: Name, ID: ID)
     }
-    
     
     
 
@@ -73,6 +73,7 @@ extension SpecificCategoryController : UITableViewDataSource,UITableViewDelegate
         cell.nameLabel.text = items.items[indexPath.row].Name
         cell.addressLabel.text = items.items[indexPath.row].Address
         cell.descriptionLabel.text = items.items[indexPath.row].Description
+        cell.idCompany = items.items[indexPath.row].ID!
         cell.availabilityLabel.text = "Locuri libere"
         cell.delegate = self
         

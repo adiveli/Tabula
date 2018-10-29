@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/////////////////////////////////////////////////////////////
 struct Categories: Codable{
     var Categories : [Category]
     init() {
@@ -18,7 +18,7 @@ struct Categories: Codable{
 struct Category: Codable{
     var Name : String?
 }
-
+/////////////////////////////////////////////////////////////
 struct Specialization: Codable{
     var Specialization: String?
     var ID : Int?
@@ -31,7 +31,7 @@ struct Specializations: Codable{
     }
 }
 
-
+/////////////////////////////////////////////////////////////
 struct Item: Codable{
     
     let Name : String?
@@ -50,6 +50,24 @@ struct ItemArray: Codable{
     }
     
 }
+/////////////////////////////////////////////////////////////
 
+struct Service: Codable{
+    
+    let Name : String?
+    let Price : Int?
+    
+    init(nume: String, pret: Int){
+        self.Name = nume
+        self.Price = pret
+    }
+}
 
-
+struct ServiceArray: Codable{
+    
+    var Services : [Service]
+    init() {
+        Services = []
+    }
+    
+}

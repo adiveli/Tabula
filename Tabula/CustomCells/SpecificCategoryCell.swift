@@ -17,6 +17,7 @@ class SpecificCategoryCell: UITableViewCell {
     @IBOutlet weak var availabilityLabel: UILabel!
     @IBOutlet weak var chenarView: UIImageView!
     
+    var idCompany = Int()
     weak var delegate : SpecificCellDelegate?
     
     override func awakeFromNib() {
@@ -32,7 +33,7 @@ class SpecificCategoryCell: UITableViewCell {
     
     // function which is triggered when handleTap is called
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        delegate?.specificCategoryTapped(self,value: nameLabel.text ?? "Error")
+        delegate?.specificCategoryTapped(self,Name: nameLabel.text ?? "Error", ID: idCompany)
     }
 
 }

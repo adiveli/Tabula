@@ -17,7 +17,7 @@ protocol CategoriesCellDelegate : class {
 protocol ContainerDelegate : class{
     
     func setCategory(value: String)
-    func setSpecific(value: String)
+    func setSpecific(Name: String, ID: Int)
     
 }
 

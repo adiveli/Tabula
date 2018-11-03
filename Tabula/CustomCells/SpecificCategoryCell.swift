@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import Cosmos
 
 class SpecificCategoryCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var ratingStack: UIStackView!
     @IBOutlet weak var availabilityLabel: UILabel!
     @IBOutlet weak var chenarView: UIImageView!
+    @IBOutlet weak var ratingStack: CosmosView!
     
     var idCompany = Int()
     weak var delegate : SpecificCellDelegate?
@@ -27,6 +28,8 @@ class SpecificCategoryCell: UITableViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.chenarView.addGestureRecognizer(tap)
         chenarView.isUserInteractionEnabled = true
+        ratingStack.settings.updateOnTouch = false
+        ratingStack.isUserInteractionEnabled = false
         
         
     }

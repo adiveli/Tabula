@@ -38,7 +38,7 @@ struct Item: Codable{
     let Description : String?
     let Address :  String?
     let Photos : String?
-    let Rating : Int?
+    let Rating : Double?
     let ID : Int?
 }
 
@@ -71,3 +71,68 @@ struct ServiceArray: Codable{
     }
     
 }
+
+
+/////////////////////////////////////////////////////////////
+
+
+struct Review: Codable{
+    
+    let Descriere : String?
+    let Stars : Int?
+    let Created_at : String?
+    let FirstName : String?
+    let LastName : String?
+    
+    init(descriere: String, stars: Int, creationDate: String, Fname: String, LName:String){
+        self.Descriere = descriere
+        self.Stars = stars
+        self.Created_at = creationDate
+        self.FirstName = Fname
+        self.LastName = LName
+    }
+}
+
+struct ReviewsArray: Codable{
+    
+    var Reviews : [Review]
+    init() {
+        Reviews = []
+    }
+    
+}
+
+/////////////////////////////////////////////////////////////
+struct Promotion: Codable{
+    
+    let CompanyID : Int?
+    let Name : String?
+    let Description : String?
+    let VoucherType : Int?
+    let VoucherCode : String?
+    let Date : String?
+    let Specilization : String?
+    
+    init(id: Int, nume: String, descriere: String, tipVoucher: Int, codVoucher: String, calendar:String, specializare: String){
+        self.CompanyID = id
+        self.Name = nume
+        self.Description = descriere
+        self.VoucherType = tipVoucher
+        self.VoucherCode = codVoucher
+        self.Date = calendar
+        self.Specilization = specializare
+        
+        
+    }
+}
+
+struct PromotionsArray: Codable{
+    
+    var Promotions : [Promotion]
+    init() {
+        Promotions = []
+    }
+    
+}
+
+/////////////////////////////////////////////////////////////

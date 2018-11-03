@@ -15,7 +15,8 @@ target 'Tabula' do
  pod 'FBSDKLoginKit'
  pod 'moa', '~> 10.0'
  pod 'Auk', '~> 9.0'
-
+ pod 'Cosmos', '~> 17.0'
+ pod 'ADMozaicCollectionViewLayout', '~> 4.0'
 
   target 'TabulaTests' do
     inherit! :search_paths

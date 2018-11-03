@@ -75,6 +75,8 @@ extension SpecificCategoryController : UITableViewDataSource,UITableViewDelegate
         cell.descriptionLabel.text = items.items[indexPath.row].Description
         cell.idCompany = items.items[indexPath.row].ID!
         cell.availabilityLabel.text = "Locuri libere"
+        cell.ratingStack.settings.fillMode = .precise
+        cell.ratingStack.rating = items.items[indexPath.row].Rating!
         cell.delegate = self
         
         return cell

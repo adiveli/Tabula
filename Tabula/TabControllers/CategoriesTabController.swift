@@ -124,6 +124,15 @@ class CategoriesTabController: UIViewController, ContainerDelegate {
         
         if let specificController = self.container.currentViewController as? SpecificController{
             specificController.nameLabel.text = Name
+            specificController.companyID = ID
+            
+            /////////maintain different data for every company////////
+            specificController.container.segueIdentifierReceivedFromParent("services")
+            specificController.reviewButton.setImage(UIImage(named: "reviewsIcon"), for: UIControlState.normal)
+            specificController.appointmentButton.setImage(UIImage(named: "AppointmentsIcon"), for: UIControlState.normal)
+            specificController.servicesButton.setImage(UIImage(named: "ServiceIconColor"), for: UIControlState.normal)
+            ///////////////////////////////////////////////////////////
+            
             if let serviceController = specificController.container.currentViewController as? ServicesController{
                 serviceController.fetchData(company: ID)
             }

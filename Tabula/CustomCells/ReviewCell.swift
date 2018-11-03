@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Cosmos
 
 class ReviewCell: UITableViewCell {
 
+    @IBOutlet weak var creationDateLabel: UILabel!
+    @IBOutlet weak var ratingStack: CosmosView!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
@@ -19,6 +22,7 @@ class ReviewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        ratingStack.settings.updateOnTouch = false
 
         // Configure the view for the selected state
     }

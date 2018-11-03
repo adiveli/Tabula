@@ -29,6 +29,8 @@ class SpecificController: UIViewController {
     
     var container : ContainerViewController!
     
+    var companyID : Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,8 @@ class SpecificController: UIViewController {
         servicesButton.setImage(UIImage(named: "ServiceIcon"), for: UIControlState.normal)
         container.segueIdentifierReceivedFromParent("reviews")
         if let specificController = self.container.currentViewController as? ReviewsController{
-            print("Reviews")
+            specificController.fetchData(company: companyID)
+            specificController.companyID = companyID
         }
     }
     @IBAction func appointmentPressed(_ sender: Any) {

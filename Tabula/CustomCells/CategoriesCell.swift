@@ -10,10 +10,11 @@ import UIKit
 
 
 
-class CategoriesCell: UITableViewCell {
+class CategoriesCell: UICollectionViewCell {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var categoryNameLabel: UILabel!
+    @IBOutlet weak var iconView: UIImageView!
     
     weak var delegate: CategoriesCellDelegate?
     

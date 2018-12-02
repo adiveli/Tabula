@@ -58,26 +58,30 @@ extension PromotionCollectionController : UICollectionViewDataSource,ADMozaikLay
         var specificCell = UICollectionViewCell()
         if promotions.Promotions[indexPath.item].VoucherType == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "type1", for: indexPath) as! PromotionCardType1Cell
-            cell.imageView.image = UIImage(named: "CardType\(promotions.Promotions[indexPath.row].VoucherType ?? 1)")
+            
             cell.descriptionLabel.text = promotions.Promotions[indexPath.item].Description
             cell.titleLabel.text = promotions.Promotions[indexPath.item].Name
             cell.voucherLabel.text = promotions.Promotions[indexPath.item].VoucherCode
+            cell.viewColorContainer.backgroundColor = UIColor(hex: promotions.Promotions[indexPath.item].VoucherColor!)
+            //cell.viewColorContainer.backgroundColor = UIColor.green
             //cell.specializationIcon.image =
             specificCell = cell
         }
         else if promotions.Promotions[indexPath.item].VoucherType == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "type2", for: indexPath) as! PromotionCardType2Cell
-            cell.imageView.image = UIImage(named: "CardType\(promotions.Promotions[indexPath.row].VoucherType ?? 2)")
+            
             cell.titleLabel.text = promotions.Promotions[indexPath.item].Name
             cell.descriptionLabel.text = promotions.Promotions[indexPath.item].Description
+            cell.viewContainer.backgroundColor = UIColor(hex: promotions.Promotions[indexPath.item].VoucherColor!)
             
             specificCell = cell
         }
         else if promotions.Promotions[indexPath.item].VoucherType == 3 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "type3", for: indexPath) as! PromotionCardType3Cell
-            cell.imageView.image = UIImage(named: "CardType\(promotions.Promotions[indexPath.row].VoucherType ?? 3)")
+           
             cell.descriptionLabel.text = promotions.Promotions[indexPath.item].Name
             cell.titleLabel.text = promotions.Promotions[indexPath.item].Description
+            cell.viewContainer.backgroundColor = UIColor(hex: promotions.Promotions[indexPath.item].VoucherColor!)
             specificCell = cell
         }
         return specificCell

@@ -117,14 +117,16 @@ class CategoriesTabController: UIViewController, ContainerDelegate {
         
     }
     
-    func setSpecific(Name: String, ID: Int){
+    func setSpecific(Name: String, ID: Int, item: Item ){
         container.segueIdentifierReceivedFromParent("toSpecific")
         backButton.isHidden = false
         filterButton.isHidden = true
+        //print(item)
         
         if let specificController = self.container.currentViewController as? SpecificController{
             specificController.nameLabel.text = Name
             specificController.companyID = ID
+            specificController.itemProperties = item
             
             /////////maintain different data for every company////////
             specificController.container.segueIdentifierReceivedFromParent("services")

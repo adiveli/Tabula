@@ -39,6 +39,10 @@ class PromotionsTabController: UIViewController,PromotionsControllerDelegate {
    
     
     override func viewDidDisappear(_ animated: Bool) {
+        
+        if let specificController = self.container.currentViewController as? SpecificController{
+            specificController.scrollView.auk.removeAll()
+        }
         container.segueIdentifierReceivedFromParent("promotionsController")
         backButton.isHidden = true
     }
@@ -64,9 +68,13 @@ class PromotionsTabController: UIViewController,PromotionsControllerDelegate {
         backButton.isHidden = false
         
         
+        
         if let specificController = self.container.currentViewController as? SpecificController{
             specificController.nameLabel.text = name
             specificController.companyID = id
+            netService.getCompanyDetails(identifier: id) { (item) in
+                specificController.itemProperties = item.items[0]
+            }
             
             /////////maintain different data for every company////////
             specificController.container.segueIdentifierReceivedFromParent("services")

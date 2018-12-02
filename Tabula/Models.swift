@@ -37,9 +37,14 @@ struct Item: Codable{
     let Name : String?
     let Description : String?
     let Address :  String?
-    let Photos : String?
     let Rating : Double?
     let ID : Int?
+    let Photo1 : String?
+    let Photo2 : String?
+    let Photo3 : String?
+    let Photo4 : String?
+    let Photo5 : String?
+    let Photo6 : String?
 }
 
 struct ItemArray: Codable{
@@ -83,13 +88,16 @@ struct Review: Codable{
     let Created_at : String?
     let FirstName : String?
     let LastName : String?
+    let Photo : String?
     
-    init(descriere: String, stars: Int, creationDate: String, Fname: String, LName:String){
+    
+    init(descriere: String, stars: Int, creationDate: String, Fname: String, LName:String, photo: String){
         self.Descriere = descriere
         self.Stars = stars
         self.Created_at = creationDate
         self.FirstName = Fname
         self.LastName = LName
+        self.Photo = photo
     }
 }
 
@@ -109,15 +117,18 @@ struct Promotion: Codable{
     let Name : String?
     let Description : String?
     let VoucherType : Int?
+    let VoucherColor : String?
     let VoucherCode : String?
     let Date : String?
     let Specilization : String?
     
-    init(id: Int, nume: String, descriere: String, tipVoucher: Int, codVoucher: String, calendar:String, specializare: String){
+    
+    init(id: Int, nume: String, descriere: String, tipVoucher: Int, culoare: String, codVoucher: String, calendar:String, specializare: String){
         self.CompanyID = id
         self.Name = nume
         self.Description = descriere
         self.VoucherType = tipVoucher
+        self.VoucherColor = culoare
         self.VoucherCode = codVoucher
         self.Date = calendar
         self.Specilization = specializare

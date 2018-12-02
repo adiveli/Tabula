@@ -12,6 +12,8 @@ import UIKit
 class ServicesController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var shadowContainer : UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     weak var delegate : ServiceDelegate!
     
@@ -24,6 +26,24 @@ class ServicesController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        shadowContainer.layer.shadowColor = UIColor.gray.cgColor
+        shadowContainer.layer.shadowOpacity = 1.2
+        shadowContainer.layer.shadowOffset = CGSize(width: -1, height: 1)
+        shadowContainer.layer.shadowRadius = 10
+        shadowContainer.layer.shadowPath = UIBezierPath(rect: CGRect(x: shadowContainer.bounds.origin.x, y: shadowContainer.bounds.origin.y, width: shadowContainer.bounds.width-30, height: shadowContainer.bounds.height-30)).cgPath
+        
+        //shadowView.layer.cornerRadius = shadowView.frame.size.width/30
+        //shadowView.clipsToBounds = true
+        tableView.layer.cornerRadius = tableView.frame.size.width/30
+        tableView.clipsToBounds = true
+        
+        tableView.layer.borderWidth = 1.0
+        tableView.layer.borderColor = UIColor.black.cgColor
+        titleLabel.layer.cornerRadius = titleLabel.frame.size.width/4
+        titleLabel.layer.borderWidth = 1.0
+        titleLabel.layer.borderColor = UIColor.black.cgColor
+        
     }
     
     func fetchData(company: Int){
@@ -54,8 +74,6 @@ extension ServicesController : UITableViewDelegate,UITableViewDataSource{
         return servicesArray.Services.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
-    }
+    
     
 }

@@ -12,6 +12,7 @@ class ServiceCell: UITableViewCell {
 
     @IBOutlet weak var serviceLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -19,8 +19,10 @@ class SpecificController: UIViewController {
     
     
     
+    @IBOutlet weak var containerView: UIView!
     
-
+    @IBOutlet weak var shadowContainer: UIView!
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var reviewButton: UIButton!
@@ -30,15 +32,52 @@ class SpecificController: UIViewController {
     var container : ContainerViewController!
     
     var companyID : Int!
+    var itemProperties : Item!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         servicesButton.setImage(UIImage(named: "ServiceIconColor"), for: UIControlState.normal)
+        //scrollView.auk.removeAll()
         
-        scrollViewSetup()
+        scrollView.layer.borderColor = UIColor.black.cgColor
+        scrollView.layer.borderWidth = 1.0
+        scrollView.layer.cornerRadius = scrollView.frame.size.width/30
+        scrollView.clipsToBounds = true
+        
+        
+        //containerView.layer.borderColor = UIColor.black.cgColor
+        //containerView.layer.borderWidth = 1.0
+        //containerView.layer.cornerRadius = containerView.frame.size.width/30
+        //containerView.clipsToBounds = true
+        
+        
+//        containerView.layer.shadowColor = UIColor.gray.cgColor
+//        containerView.layer.shadowOpacity = 1.2
+//        containerView.layer.shadowOffset = CGSize(width: -1, height: 1)
+//        containerView.layer.shadowRadius = 10
+//        containerView.layer.shadowPath = UIBezierPath(rect: CGRect(x: containerView.bounds.origin.x, y: containerView.bounds.origin.y, width: containerView.bounds.width, height: containerView.bounds.height+80)).cgPath
+        
+        shadowContainer.layer.cornerRadius = shadowContainer.frame.size.width/30
+        shadowContainer.layer.shadowColor = UIColor.gray.cgColor
+        shadowContainer.layer.shadowOpacity = 1.2
+        shadowContainer.layer.shadowOffset = CGSize(width: -1, height: 1)
+        shadowContainer.layer.shadowRadius = 10
+        shadowContainer.layer.shadowPath = UIBezierPath(rect: CGRect(x: shadowContainer.bounds.origin.x, y: shadowContainer.bounds.origin.y, width: shadowContainer.bounds.width, height: shadowContainer.bounds.height)).cgPath
+        
+        //shadowContainer.clipsToBounds = true
+        //print(itemProperties)
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        scrollView.auk.removeAll()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        scrollViewSetup()
+        
     }
     
     
@@ -89,18 +128,37 @@ class SpecificController: UIViewController {
     
     
     func scrollViewSetup(){
+        //print(itemProperties!.Photo1)
+        scrollView.auk.settings.contentMode = .scaleAspectFill
+        scrollView.auk.settings.placeholderImage = UIImage(named: "loading")
         
-        scrollView.auk.show(url: "https://ziarulunirea.ro/wp-content/uploads/2016/02/stomatologie.jpg")
-        scrollView.auk.show(url: "https://media0.webgarden.ro/images/media0:4b648f4b4bbec.png/1.bmp.png")
-        scrollView.auk.show(url: "https://media.publika.md/md/image/201604/w720/student_87874900.jpg")
+        if itemProperties.Photo1 != ""{
+            scrollView.auk.show(url: itemProperties.Photo1 as! String)
+            
+        }
+        if itemProperties.Photo2 != ""{
+            scrollView.auk.show(url: itemProperties.Photo2 as! String)
+        }
+        if itemProperties.Photo3 != ""{
+            scrollView.auk.show(url: itemProperties.Photo3 as! String)
+        }
+        if itemProperties.Photo4 != ""{
+            scrollView.auk.show(url: itemProperties.Photo4 as! String)
+        }
+        if itemProperties.Photo5 != ""{
+            scrollView.auk.show(url: itemProperties.Photo5 as! String)
+        }
+        if itemProperties.Photo6 != ""{
+            scrollView.auk.show(url: itemProperties.Photo6 as! String)
+        }
+        
+    
         // Return the number of pages in the scroll view
-        scrollView.auk.numberOfPages
+        if scrollView.auk.numberOfPages == 0{
+            scrollView.auk.settings.contentMode = .scaleAspectFit
+            scrollView.auk.show(url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png")
+        }
         
-        // Get the index of the current page or nil if there are no pages
-        scrollView.auk.currentPageIndex
-        
-        // Return currently displayed images
-        scrollView.auk.images
         scrollView.auk.startAutoScroll(delaySeconds: 3)
         
         

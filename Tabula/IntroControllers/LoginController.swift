@@ -25,6 +25,8 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var googleButton : UIButton!
     
+    var netService = NetworkServices()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         googleButton.addTarget(self, action: #selector(signInUsingGoogle(_:)), for: .touchUpInside)
@@ -36,6 +38,11 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
     
     @IBAction func registrationPressed(_ sender: Any) {
         performSegue(withIdentifier: "toRegistration", sender: nil)
+    }
+    
+    
+    @IBAction func forgotPasswordPressed(_ sender: Any) {
+        performSegue(withIdentifier: "forgotPasswordSubmission", sender: nil)
     }
     
     
@@ -55,6 +62,7 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
         }else{
             if let gmailUser = user{
                 print("working!\(gmailUser.profile.email)")
+                self.performSegue(withIdentifier: "loginSucceded", sender: nil)
             }
         }
     }
@@ -77,7 +85,7 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
                 break
             case .success(let grantedPermissions, let declinedPermisions, let accessToken):
                 print("Acces token: \(accessToken)")
-                
+                self.performSegue(withIdentifier: "loginSucceded", sender: nil)
             
            }
         }
@@ -118,16 +126,28 @@ class LoginController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
                         let firstName = user.value(forKey: "FirstName") as! String
                         let lastName = user.value(forKey: "LastName") as! String
                         let userPhone = user.value(forKey: "TN") as! String
+                        let email = user.value(forKey: "Email") as! String
+                        let cnp = user.value(forKey: "CNP") as! String
+                        let accountType = user.value(forKey: "COMPANY") as! Int
+                        let validation = user.value(forKey: "VALIDATION") as! Int
+                        let userPhotoURL = user.value(forKey: "Photo") as? String
+                        let companyID = user.value(forKey: "CompanyID") as? Int
+                        
                         
                         //saving user values to defaults
                         self.defaultValues.set(userId, forKey: "userid")
                         self.defaultValues.set(firstName, forKey: "firstName")
                         self.defaultValues.set(lastName, forKey: "lastName")
                         self.defaultValues.set(userPhone, forKey: "userphone")
+                        self.defaultValues.set(email, forKey: "email")
+                        self.defaultValues.set(cnp, forKey: "cnp")
+                        self.defaultValues.set(accountType, forKey: "accountType")
+                        self.defaultValues.set(validation, forKey: "validation")
+                        self.defaultValues.set(companyID, forKey: "cid")
+                        self.defaultValues.set(userPhotoURL, forKey: "userPhoto")
                         
                         //switching the screen
                         
-                        print("It worked!")
                         
                         self.performSegue(withIdentifier: "loginSucceded", sender: nil)
                         

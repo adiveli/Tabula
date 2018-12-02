@@ -17,6 +17,13 @@ target 'Tabula' do
  pod 'Auk', '~> 9.0'
  pod 'Cosmos', '~> 17.0'
  pod 'ADMozaicCollectionViewLayout', '~> 4.0'
+ pod 'Firebase/Core'
+ pod 'Firebase/Storage'
+ pod 'ImagePicker'
+ pod 'Lightbox'
+ pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
+ pod 'Kingfisher', '~> 4.0'
+ pod 'MaterialComponents/ActivityIndicator'
 
   target 'TabulaTests' do
     inherit! :search_paths

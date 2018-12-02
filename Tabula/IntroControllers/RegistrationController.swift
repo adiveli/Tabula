@@ -51,6 +51,8 @@ class RegistrationController: UIViewController {
                 //getting the json value from the server
                 if let result = response.result.value {
                     
+                    
+                self.performSegue(withIdentifier: "backLogin", sender: nil)
                     //converting it as NSDictionary
                     //let jsonData = result as! NSDictionary
                     

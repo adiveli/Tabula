@@ -1,5 +1,4 @@
 # Tabula
 
-Advertising app
-In progress
-Auto-Layout set.
+Centralized app which could gather multiple domains and list specific businesses with contact numbers and appointment feature",
+                
